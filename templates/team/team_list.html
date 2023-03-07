@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Teams</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container container-sm">
+        <a href="{% url 'team_create' %}" class='btn btn-info'>Create team</a>
+        <a href="{% url 'proposal_list' %}" class='btn btn-success'>Proposals</a>
+        <br>
+        <br>
+        <div class="row">
+        {% for team in teams %}
+            <div class="col-md-4">
+                <h2>{{ team.name }}</h2>
+                <h5>[{{ team.prefix }}]</h5>
+                <p>Lead: {{ team.lead.get_short_name }} ({{ team.lead.email }})</p>
+                <p><a href="{% url 'team_retrieve' team.prefix %}" class='btn btn-outline-info'>
+                    Check team</a></p>
+            </div>
+            <br>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
